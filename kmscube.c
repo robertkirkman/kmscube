@@ -41,7 +41,7 @@ static const struct egl *egl;
 static const struct gbm *gbm;
 static const struct drm *drm;
 
-static const char *shortopts = "Ac:D:f:M:m:p:S:s:V:v:x";
+static const char *shortopts = "Ac:D:f:M:m:s:V:v:x";
 
 static const struct option longopts[] = {
 	{"atomic", no_argument,       0, 'A'},
@@ -50,7 +50,7 @@ static const struct option longopts[] = {
 	{"format", required_argument, 0, 'f'},
 	{"mode",   required_argument, 0, 'M'},
 	{"modifier", required_argument, 0, 'm'},
-	{"perfcntr", required_argument, 0, 'p'},
+/*	{"perfcntr", required_argument, 0, 'p'},*/
 	{"samples",  required_argument, 0, 's'},
 	{"video",  required_argument, 0, 'V'},
 	{"vmode",  required_argument, 0, 'v'},
@@ -60,7 +60,7 @@ static const struct option longopts[] = {
 
 static void usage(const char *name)
 {
-	printf("Usage: %s [-ADfMmSsVvx]\n"
+	printf("Usage: %s [-ADfMmsVvx]\n"
 			"\n"
 			"options:\n"
 			"    -A, --atomic             use atomic modesetting and fencing\n"
@@ -73,10 +73,10 @@ static void usage(const char *name)
 			"        nv12-2img -  yuv textured (color conversion in shader)\n"
 			"        nv12-1img -  yuv textured (single nv12 texture)\n"
 			"    -m, --modifier=MODIFIER  hardcode the selected modifier\n"
-			"    -p, --perfcntr=LIST      sample specified performance counters using\n"
+/*			"    -p, --perfcntr=LIST      sample specified performance counters using\n"
 			"                             the AMD_performance_monitor extension (comma\n"
 			"                             separated list, shadertoy mode only)\n"
-			"    -S, --shadertoy=FILE     use specified shadertoy shader\n"
+			"    -S, --shadertoy=FILE     use specified shadertoy shader\n"*/
 			"    -s, --samples=N          use MSAA\n"
 			"    -V, --video=FILE         video textured cube (comma separated list)\n"
 			"    -v, --vmode=VMODE        specify the video mode in the format\n"
@@ -90,12 +90,12 @@ int main(int argc, char *argv[])
 {
 	const char *device = NULL;
 	const char *video = NULL;
-	const char *shadertoy = NULL;
-	const char *perfcntr = NULL;
+/*	const char *shadertoy = NULL;
+	const char *perfcntr = NULL;*/
 	char mode_str[DRM_DISPLAY_MODE_LEN] = "";
 	char *p;
 	enum mode mode = SMOOTH;
-	uint32_t format = DRM_FORMAT_XRGB8888;
+	uint32_t format = DRM_FORMAT_RGB565;
 	uint64_t modifier = DRM_FORMAT_MOD_LINEAR;
 	int samples = 0;
 	int atomic = 0;
@@ -154,13 +154,13 @@ int main(int argc, char *argv[])
 		case 'm':
 			modifier = strtoull(optarg, NULL, 0);
 			break;
-		case 'p':
+/*		case 'p':
 			perfcntr = optarg;
 			break;
 		case 'S':
 			mode = SHADERTOY;
 			shadertoy = optarg;
-			break;
+			break;*/
 		case 's':
 			samples = strtoul(optarg, NULL, 0);
 			break;
@@ -210,8 +210,8 @@ int main(int argc, char *argv[])
 		egl = init_cube_smooth(gbm, samples);
 	else if (mode == VIDEO)
 		egl = init_cube_video(gbm, video, samples);
-	else if (mode == SHADERTOY)
-		egl = init_cube_shadertoy(gbm, shadertoy, samples);
+/*	else if (mode == SHADERTOY)
+		egl = init_cube_shadertoy(gbm, shadertoy, samples);*/
 	else
 		egl = init_cube_tex(gbm, mode, samples);
 
@@ -220,13 +220,14 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	if (perfcntr) {
+/*	if (perfcntr) {
 		if (mode != SHADERTOY) {
 			printf("performance counters only supported in shadertoy mode\n");
 			return -1;
 		}
 		init_perfcntrs(egl, perfcntr);
 	}
+*/
 
 	/* clear the color buffer */
 	glClearColor(0.5, 0.5, 0.5, 1.0);

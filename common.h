@@ -37,7 +37,7 @@
 
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 
-/* from mesa's util/macros.h: */
+/* from mesa's util/macros.h: 
 #define MIN2( A, B )   ( (A)<(B) ? (A) : (B) )
 #define MAX2( A, B )   ( (A)>(B) ? (A) : (B) )
 #define MIN3( A, B, C ) ((A) < (B) ? MIN2(A, C) : MIN2(B, C))
@@ -48,6 +48,7 @@ u_minify(unsigned value, unsigned levels)
 {
 	return MAX2(1, value >> levels);
 }
+*/
 
 #ifndef DRM_FORMAT_MOD_LINEAR
 #define DRM_FORMAT_MOD_LINEAR 0
@@ -132,7 +133,7 @@ struct egl {
 	PFNEGLDUPNATIVEFENCEFDANDROIDPROC eglDupNativeFenceFDANDROID;
 
 	/* AMD_performance_monitor */
-	PFNGLGETPERFMONITORGROUPSAMDPROC         glGetPerfMonitorGroupsAMD;
+/*	PFNGLGETPERFMONITORGROUPSAMDPROC         glGetPerfMonitorGroupsAMD;
 	PFNGLGETPERFMONITORCOUNTERSAMDPROC       glGetPerfMonitorCountersAMD;
 	PFNGLGETPERFMONITORGROUPSTRINGAMDPROC    glGetPerfMonitorGroupStringAMD;
 	PFNGLGETPERFMONITORCOUNTERSTRINGAMDPROC  glGetPerfMonitorCounterStringAMD;
@@ -142,7 +143,7 @@ struct egl {
 	PFNGLSELECTPERFMONITORCOUNTERSAMDPROC    glSelectPerfMonitorCountersAMD;
 	PFNGLBEGINPERFMONITORAMDPROC             glBeginPerfMonitorAMD;
 	PFNGLENDPERFMONITORAMDPROC               glEndPerfMonitorAMD;
-	PFNGLGETPERFMONITORCOUNTERDATAAMDPROC    glGetPerfMonitorCounterDataAMD;
+	PFNGLGETPERFMONITORCOUNTERDATAAMDPROC    glGetPerfMonitorCounterDataAMD;*/
 
 	bool modifiers_supported;
 
@@ -170,12 +171,12 @@ enum mode {
 	NV12_2IMG,     /* NV12, handled as two textures and converted to RGB in shader */
 	NV12_1IMG,     /* NV12, imported as planar YUV eglimg */
 	VIDEO,         /* video textured cube */
-	SHADERTOY,     /* display shadertoy shader */
+/*	SHADERTOY,        display shadertoy shader */
 };
 
 const struct egl * init_cube_smooth(const struct gbm *gbm, int samples);
 const struct egl * init_cube_tex(const struct gbm *gbm, enum mode mode, int samples);
-const struct egl * init_cube_shadertoy(const struct gbm *gbm, const char *shadertoy, int samples);
+/*const struct egl * init_cube_shadertoy(const struct gbm *gbm, const char *shadertoy, int samples);*/
 
 #ifdef HAVE_GST
 
@@ -196,11 +197,13 @@ init_cube_video(const struct gbm *gbm, const char *video, int samples)
 }
 #endif
 
+/*
 void init_perfcntrs(const struct egl *egl, const char *perfcntrs);
 void start_perfcntrs(void);
 void end_perfcntrs(void);
 void finish_perfcntrs(void);
 void dump_perfcntrs(unsigned nframes, uint64_t elapsed_time_ns);
+*/
 
 #define NSEC_PER_SEC (INT64_C(1000) * USEC_PER_SEC)
 #define USEC_PER_SEC (INT64_C(1000) * MSEC_PER_SEC)

@@ -35,7 +35,7 @@ endif
 
 sources = files(
   'common.c',
-  'cube-shadertoy.c',
+#  'cube-shadertoy.c',
   'cube-smooth.c',
   'cube-tex.c',
   'drm-atomic.c',
@@ -45,7 +45,7 @@ sources = files(
   'frame-512x512-NV12.c',
   'frame-512x512-RGBA.c',
   'kmscube.c',
-  'perfcntrs.c',
+#  'perfcntrs.c',
 )
 
 cc = meson.get_compiler('c')
@@ -96,10 +96,10 @@ endif
 executable('kmscube', sources, dependencies : dep_common, install : true)
 
 
-executable('texturator', files(
-	'common.c',
-	'drm-legacy.c',
-	'drm-common.c',
-	'perfcntrs.c',  # not used, but required to link
-	'texturator.c',
-), dependencies : dep_common, install : true)
+#executable('texturator', files(
+#	'common.c',
+#	'drm-legacy.c',
+#	'drm-common.c',
+#	'perfcntrs.c',  # not used, but required to link
+#	'texturator.c',
+#), dependencies : dep_common, install : true)

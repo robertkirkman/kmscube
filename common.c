@@ -414,7 +414,7 @@ int init_egl(struct egl *egl, const struct gbm *gbm, int samples)
 
 	get_proc_gl(GL_OES_EGL_image, glEGLImageTargetTexture2DOES);
 
-	get_proc_gl(GL_AMD_performance_monitor, glGetPerfMonitorGroupsAMD);
+	/*get_proc_gl(GL_AMD_performance_monitor, glGetPerfMonitorGroupsAMD);
 	get_proc_gl(GL_AMD_performance_monitor, glGetPerfMonitorCountersAMD);
 	get_proc_gl(GL_AMD_performance_monitor, glGetPerfMonitorGroupStringAMD);
 	get_proc_gl(GL_AMD_performance_monitor, glGetPerfMonitorCounterStringAMD);
@@ -424,7 +424,7 @@ int init_egl(struct egl *egl, const struct gbm *gbm, int samples)
 	get_proc_gl(GL_AMD_performance_monitor, glSelectPerfMonitorCountersAMD);
 	get_proc_gl(GL_AMD_performance_monitor, glBeginPerfMonitorAMD);
 	get_proc_gl(GL_AMD_performance_monitor, glEndPerfMonitorAMD);
-	get_proc_gl(GL_AMD_performance_monitor, glGetPerfMonitorCounterDataAMD);
+	get_proc_gl(GL_AMD_performance_monitor, glGetPerfMonitorCounterDataAMD);*/
 
 	if (!gbm->surface) {
 		for (unsigned i = 0; i < ARRAY_SIZE(gbm->bos); i++) {
