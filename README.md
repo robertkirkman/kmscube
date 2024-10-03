@@ -1,3 +1,5 @@
+## [Replaced by this repository](https://github.com/robertkirkman/sm64ex-bbb-doc)
+
 kmscube
 =======
 Fork of freedesktop kmscube with the bare minimum stripped out (OpenGL ES 3.0+ 
